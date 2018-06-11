@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Cart</title>
+        #{cartManagedBean.refreshCartList()}
+    </h:head>
+    <h:body>
+        <ui:include src="top.xhtml"/>
+        <!-- Title Page -->
+        <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m hov-img-zoom" >
+            <img src="#{resource['images/buy-now.jpg']}" alt="IMG-ABOUT"/>
+        </section>
+
+        <!-- Cart -->
+        <section class="cart bgwhite p-t-70 p-b-100">
+            <div class="container">
+                <!-- Cart item -->
+                <div class="container-table-cart pos-relative">
+                    <div class="wrap-table-shopping-cart bgwhite">
+                        <table class="table-shopping-cart">
+                            <tr class="table-head">
+                                <th class="column-1"></th>
+                                <th class="column-2">Product</th>
+                                <th class="column-2">Price</th>
+                                <th class="column-2">Available Quantity</th>
+                                <th class="column-2">Quantity</th>
+                                <th class="column-2">Total</th>
+                                <th class="column-2">Update</th>
+                            </tr>
+                            <h:panelGroup  id="cartListID">
+                                <ui:repeat var="cartProduct" value="#{cartManagedBean.cartList}" varStatus="status">
+                                    <tr class="table-row">
+                                        <td class="column-1">
+                                            <div class="cart-img-product b-rad-4 o-f-hidden">
+                                                <img src="#{resource[cartProduct.productId.image]}" alt="IMG-PRODUCT"/>
+                                            </div>
+                                        </td>
+                                        <td class="column-2">#{cartProduct.productId.name}</td>
+                                        <td class="column-3" id="price">#{cartProduct.productId.priceSale}</td>
+                                        <td class="column-4">#{cartProduct.productId.availableQuantity}</td>
+
+                                        <td class="column-5">
+                                            <div class="flex-w bo5 of-hidden w-size17">
+                                                <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2" id="btnMinus">
+                                                    <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
+                                                </button>
+
+                                                <input id="quantity" class="size8 m-text18 t-center num-product quantityClass" type="number" name="num-product2" value="#{cartProduct.quantity}"/>
+
+                                                <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2" id="btnPlus">
+                                                    <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
+                                                </button> 
+                                            </div>
+
+                                        </td>
+
+                                        <td class="column-6" id="outcome">0</td>
+                                        <td class="column-7">
+                                            <h:form>
+                                                <f:ajax execute="updateCartObject">
+                                                    <h:commandLink onclick="updateFunction(this)" actionListener="#{cartManagedBean.updateCart(cartProduct)}" id="updateCartObject" class=" flex-c-m size7 eff2 m-r-60">
+                                                        <i class="fa fa-refresh" aria-hidden="true"></i>
+                                                        <h:panelGroup styleClass="inputHiddenClass">
+                                                            <h:inputHidden id="updateQuantityTemp" value="#{cartProduct.quantity}"/>
+                                                        </h:panelGroup>
+                                                    </h:commandLink>
+                                                </f:ajax>
+                                            </h:form>
+                                        </td>
+                                        <td class="column-8" >
+                                            <h:form>
+                                                <h:commandLink  actionListener="#{cartManagedBean.deleteProductFromCart(cartProduct)}" id="trashId" class=" flex-c-m size7 eff2 m-r-60">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </h:commandLink>
+                                            </h:form>
+                                        </td>
+                                    </tr>
+                                </ui:repeat>
+                            </h:panelGroup>>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="flex-w flex-sb-m p-t-25 p-b-25 bo8 p-l-35 p-r-60 p-lr-15-sm" style="float:right;">
+
+
+                    
+                </div>
+
+                <!-- Total -->
+                <div class="bo9 w-size18 p-l-40 p-r-40 p-t-30 p-b-38 m-t-30 m-r-0 m-l-auto p-lr-15-sm" style="clear: both;">
+                    <h5 class="m-text20 p-b-24">
+                        Cart Totals
+                    </h5>
+                    <!--  -->
+                    <div class="flex-w flex-sb bo10 p-t-15 p-b-20">
+                        <span class="s-text18 w-size19 w-full-sm">
+                            Shipping:
+                        </span>
+
+                        <div class="w-size20 w-full-sm">
+                            <p class="s-text8 p-b-23">
+                                There are no shipping methods available. Please double check your address, or contact us if you need any help.
+                            </p>
+
+                            <div class="size13 bo4 m-b-12">
+                                <input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="state" placeholder="State /  country"/>
+                            </div>
+
+                            <div class="size13 bo4 m-b-22">
+                                <input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="postcode" placeholder="Postcode / Zip"/>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!--  -->
+                    <div class="flex-w flex-sb-m p-t-26 p-b-30">
+                        <span class="m-text22 w-size19 w-full-sm">
+                            Total: 
+                        </span>
+                        <span id="totalId" class="m-text21 w-size20 w-full-sm">
+                            #{cartManagedBean.cartTotal}
+                        </span>
+                    </div>
+
+                    <div class="size15 trans-0-4">
+                        <h:form>
+                        <h:commandButton type="submit" value="Proceed to Checkout"  actionListener="#{cartManagedBean.createSale()}" id="saleButton" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4 p-t-20 p-b-20 saleButtonCSS">
+                        </h:commandButton>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <ui:include src="bottom.xhtml"/>
+        <script>
+            $(document).ready(function () {
+                $(".quantityClass").each(function (index) {
+                    var quantityTemp = $(this).parent().find('#quantity')[0].value;
+                    var priceTemp = $(this).parent().parent().parent().find('#price').html();
+                    var outcomeTemp = parseFloat(priceTemp) * (parseFloat(quantityTemp));
+                    $(this).parent().parent().parent().find('#outcome').html(outcomeTemp);
+                    var x = $('#totalId').html();
+                    var sum = parseFloat(x) + parseFloat(outcomeTemp);
+                    $('#totalId').html(sum);
+                });
+                $(document).on('click', '#btnPlus', function () {
+                    var quantityTemp = $(this).parent().find('#quantity')[0].value;
+                    var priceTemp = $(this).parent().parent().parent().find('#price').html();
+                    var outcomeTemp = parseFloat(priceTemp) * (parseFloat(quantityTemp));
+                    $(this).parent().parent().parent().find('#outcome').html(outcomeTemp);
+                });
+                $(document).on('click', '#btnMinus', function () {
+                    var quantityTemp = $(this).parent().find('#quantity')[0].value;
+                    var priceTemp = $(this).parent().parent().parent().find('#price').html();
+                    var outcomeTemp = parseFloat(priceTemp) * (parseFloat(quantityTemp));
+                    $(this).parent().parent().parent().find('#outcome').html(outcomeTemp);
+                });
+
+                $(document).on('change paste keyup', '#quantity', function () {
+                    var quantityTemp = $(this).parent().find('#quantity')[0].value;
+                    var priceTemp = $(this).parent().parent().parent().find('#price').html();
+                    var outcomeTemp = parseFloat(priceTemp) * (parseFloat(quantityTemp));
+                    $(this).parent().parent().parent().find('#outcome').html(outcomeTemp);
+                });
+
+            });
+
+            function calculateTotal() {
+                var quantityTemp = $(this).parent().find('#quantity')[0].value;
+                var priceTemp = $(this).parent().parent().parent().find('#price').html();
+                var outcomeTemp = parseFloat(priceTemp) * (parseFloat(quantityTemp));
+                $(this).parent().parent().parent().find('#outcome').html(outcomeTemp);
+                var x = $('#totalId').html();
+                var sum = parseFloat(x) + parseFloat(outcomeTemp);
+                $('#totalId').html(sum);
+            }
+
+            function updateFunction(x) {
+                var quantityTemp = $(x).parent().parent().parent().find('#quantity').val();
+                $(x).find('.inputHiddenClass').children().val(quantityTemp);
+                var y = $(x).find('.inputHiddenClass').children().val();
+            }
+        </script>
+    </h:body>
+</html>
+
+

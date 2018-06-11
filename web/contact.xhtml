@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Partnership</title>
+
+    </h:head>
+    <body>
+        <!--header-->
+        <ui:include src="top.xhtml"/>
+
+        <!-- Title Page -->        
+        <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m hov-img-zoom" >
+            <img src="#{resource['images/contactUs.png']}" alt="IMG-ABOUT"/>
+        </section>
+        <!-- content page -->
+        <section class="bgwhite p-t-66 p-b-60">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 p-b-30">
+                        <div class="p-r-20 p-r-0-lg">
+                            <div class="contact-map size21" id="google_map" data-map-x="37.9818137" data-map-y="23.7296742" data-pin="#{resource['images/icons/icon-partner.png']}" data-scrollwhell="0" data-draggable="1"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 p-b-30">
+                        <form class="leave-comment">
+                            <h4 class="m-text26 p-b-36 p-t-15">
+                                Send us your message
+                            </h4>
+
+                            <div class="bo4 of-hidden size15 m-b-20">
+                                <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="name" placeholder="Full Name"/>
+                            </div>
+
+                            <div class="bo4 of-hidden size15 m-b-20">
+                                <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="phone-number" placeholder="Phone Number"/>
+                            </div>
+
+                            <div class="bo4 of-hidden size15 m-b-20">
+                                <input class="sizefull s-text7 p-l-22 p-r-22" type="text" name="email" placeholder="Email Address"/>
+                            </div>
+
+                            <textarea class="dis-block s-text7 size20 bo4 p-l-22 p-r-22 p-t-13 m-b-20" name="message" placeholder="Message"></textarea>
+
+                            <div class="w-size25">
+                                <!-- Button -->
+                                <button class="flex-c-m size2 bg1 bo-rad-23 hov1 m-text3 trans-0-4">
+                                    Send
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>                
+        
+        <!--footer-->
+        <ui:include src="bottom.xhtml"/>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKFWBqlKAGCeS1rMVoaNlwyayu0e0YRes"></script>
+        <h:outputScript name="js/map-custom.js"/>
+    </body>
+</html>
+

@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <!-- Footer -->
+            <footer class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">
+                <div class="flex-w p-b-90">
+                    <div class="w-size6 p-t-30 p-l-15 p-r-15 respon3">
+                        <h4 class="s-text12 p-b-30">
+                            GET IN TOUCH
+                        </h4>
+
+                        <div>
+                            <p class="s-text7 w-size27">
+                                Any questions? Let us know!
+                            </p>
+
+                            <div class="flex-m p-t-30">
+                                <a href="#" class="fs-18 color1 p-r-20 fa fa-facebook"></a>
+                                <a href="#" class="fs-18 color1 p-r-20 fa fa-instagram"></a>
+                                <a href="#" class="fs-18 color1 p-r-20 fa fa-pinterest-p"></a>
+                                <a href="#" class="fs-18 color1 p-r-20 fa fa-snapchat-ghost"></a>
+                                <a href="#" class="fs-18 color1 p-r-20 fa fa-youtube-play"></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
+                        <h4 class="s-text12 p-b-30">
+                            Categories
+                        </h4>
+
+                        <ul>
+                            <li class="p-b-9">
+                                <h:outputLink class="s-text7" value = "products.xhtml" >Fruits</h:outputLink> 
+                            </li>
+
+                            <li class="p-b-9">
+                                <h:outputLink class="s-text7" value = "products.xhtml" >Vegetables</h:outputLink> 
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
+                        <h4 class="s-text12 p-b-30">
+                            Links
+                        </h4>
+
+                        <ul>
+                            <li class="p-b-9">
+                                <h:outputLink class="s-text7" value = "products.xhtml" >Products</h:outputLink> 
+                            </li>
+                            <li class="p-b-9">
+                                <h:outputLink class="s-text7" value = "blog.xhtml" >Blog</h:outputLink> 
+                            </li>                    
+                        </ul>
+                    </div>
+
+                    <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
+                        <h4 class="s-text12 p-b-30">
+                            Help
+                        </h4>
+
+                        <ul>
+                            <li class="p-b-9">
+                                <h:outputLink class="s-text7" value = "contact.xhtml" >Contact us</h:outputLink> 
+                            </li>
+                            <li class="p-b-9">
+                                <h:outputLink class="s-text7" value = "about.xhtml" >About Us</h:outputLink> 
+                            </li> 
+                        </ul>
+                    </div>
+
+                    <div class="w-size8 p-t-30 p-l-15 p-r-15 respon3">
+                        <h4 class="s-text12 p-b-30">
+                            Newsletter
+                        </h4>
+
+                        <form>
+                            <div class="effect1 w-size9">
+                                <input class="s-text7 bg6 w-full p-b-5" type="text" name="email" placeholder="email@example.com"/>
+                                <span class="effect1-line"></span>
+                            </div>
+
+                            <div class="w-size2 p-t-20">
+                                <!-- Button -->
+                                <button class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
+                                    Subscribe
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+                <div class="t-center p-l-15 p-r-15">
+                    <a href="#">
+                        <h:graphicImage name = "images/icons/paypal.png" class="h-size2"/>
+                    </a>
+                    <a href="#">
+                        <h:graphicImage name = "images/icons/visa.png" class="h-size2"/>
+                    </a>
+                    <a href="#">
+                        <h:graphicImage name = "images/icons/mastercard.png" class="h-size2"/>
+                    </a>
+                    <a href="#">
+                        <h:graphicImage name = "images/icons/express.png" class="h-size2"/>
+                    </a>
+                    <a href="#">
+                        <h:graphicImage name = "images/icons/Bitcoin.png" class="h-size2"/>
+                    </a>
+
+                    <div class="t-center s-text8 p-t-20">
+                        Copyright © 2018 All rights reserved. With <i class="fa fa-heart-o" aria-hidden="true"></i> by the Best Bootcamp Team!
+                    </div>
+                </div>
+            </footer>
+
+
+
+            <!-- Back to top -->
+            <div class="btn-back-to-top bg0-hov" id="myBtn">
+                <span class="symbol-btn-back-to-top">
+                    <i class="fa fa-angle-double-up" aria-hidden="true"></i>
+                </span>
+            </div>
+
+
+            <h:outputScript name="vendor/jquery/jquery-3.2.1.min.js"/>
+            <h:outputScript name="vendor/animsition/js/animsition.min.js"/>
+            <h:outputScript name="vendor/slick/slick.min.js"/>
+            <h:outputScript name="js/slick-custom.js"/>
+            <h:outputScript name="vendor/countdowntime/countdowntime.js"/>
+            <h:outputScript name="vendor/lightbox2/js/lightbox.min.js"/>
+            <h:outputScript name="vendor/sweetalert/sweetalert.min.js"/>
+            <h:outputScript name="vendor/bootstrap/js/popper.js"/>
+            <h:outputScript name="vendor/bootstrap/js/bootstrap.min.js"/>
+            <h:outputScript name="vendor/select2/select2.min.js"/>
+            <script type="text/javascript">
+
+                $(document).on('click', '.block2-btn-addcart', function () {
+                    var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
+                    swal(nameProduct, "is added to cart !", "success");
+                });
+                //-- It's for productDetails
+                $(document).on('click', '.btn-addcart-product-detail', function () {
+                    var nameProduct = "";
+                    swal(nameProduct, "is added to cart !", "success");
+                });
+                //-- It's for sales buttom
+                $(document).on('click', '.saleButtonCSS', function () {
+                    var nameProduct = "";
+                    swal(nameProduct, "You successfully check out!", "success");
+                });
+
+                $(document).on('click', '.block2-btn-addwishlist', function () {
+                    var nameProduct = $(this).parent().parent().parent().parent().find('.block2-name').html();
+                    swal(nameProduct, "is added to wishlist !", "success");
+                });
+
+                if ($('#userNameId').html() != "") {
+                    var stringTemp = "\"logout.xhtml\"";
+                    $('#userNameId').append("<a href=" + stringTemp + ">(Log Out)</a>");
+                }
+                function updateQuantity(x) {
+                    var quantityTemp = parseInt($(x).parent().parent().parent().parent().parent().parent().find('#quantity').val());
+                    console.log(typeof(quantityTemp));
+                    $(x).parent().find('.inputParamClass').children().val(quantityTemp);
+                }
+                function updateQuantityWishlist(x) {
+                    var quantityTemp = parseInt($(x).parent().parent().parent().parent().find('#quantity').val());
+                    $(x).parent().find('.inputParamWishListClass').children().val(quantityTemp);
+                }
+            </script>
+            <h:outputScript name="vendor/daterangepicker/moment.min.js"></h:outputScript>
+            <h:outputScript name="vendor/daterangepicker/daterangepicker.js"></h:outputScript>
+            <h:outputScript name="js/main.js"/>
+            <h:outputScript     name="js/jsf.js"/>
+        </ui:composition>
+    </h:body>
+</html>
+

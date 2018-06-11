@@ -1,14 +1,188 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Cooperation</title>
     </h:head>
-    <h:body>
-        Hello from Facelets
-        <br />
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
-    </h:body>
+    <body>
+        <!--header-->
+        <ui:include src="top.xhtml"/>
+
+
+        <!-- Slide1 -->
+        <section class="slide1">
+            <div class="wrap-slick1">
+                <div class="slick1">
+                    <div class="item-slick1 item1-slick1" style="background-image: url(#{resource['images/marketVeg.jpg']});">
+                        <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
+                            <span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15 " data-appear="fadeInDown">
+                                Products Varieties 2018
+                            </span>
+
+                            <h2 class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37" data-appear="fadeInUp">
+                                New Agricultural Products
+                            </h2>
+
+                            <div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="zoomIn">
+                                <!-- Button -->
+                                <a href="products.html" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+                                    Shop Now
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item-slick1 item2-slick1" style="background-image: url(#{resource['images/news.png']});">
+                        <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
+                            <span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15" data-appear="rollIn">
+                                See our blog
+                            </span>
+
+                            <h2 class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37" data-appear="lightSpeedIn">
+                                ___________
+                            </h2>
+
+                            <div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="slideInUp">
+                                <!-- Button -->
+                                <a href="blog.html" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+                                    Blog
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item-slick1 item3-slick1" style="background-image: url(#{resource['images/news2.png']});">
+                        <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
+                            <span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15 text-dark" data-appear="rotateInDownLeft">
+                                Learn about us
+                            </span>
+
+                            <h2 class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37 text-dark" data-appear="rotateInUpRight">
+                                Our company
+                            </h2>
+
+                            <div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="rotateIn">
+                                <!-- Button -->
+                                <a href="about.html" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+                                    Find out
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!--Featured Products-->
+        <section class="newproduct bgwhite p-t-45 p-b-105">
+            <div class="container">
+                <div class="sec-title p-b-60">
+                    <h3 class="m-text5 t-center">
+                        Featured Products
+                    </h3>
+                </div>
+
+                <!-- Slide2 -->
+                <div class="wrap-slick2">
+                    <div class="slick2" id="featuredProducts">
+                        <ui:repeat var="product" value="#{productManagedBean.products}" varStatus="status">
+                            <div class="item-slick2 p-l-15 p-r-15">
+                                <!-- Block2 -->
+                                <div class="block2">
+                                    <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                                        <img src="#{resource[product.image]}" alt="IMG-PRODUCT"/>
+                                        <div class="block2-overlay trans-0-4">                                            
+                                            <h:form>
+                                                <h:commandLink  id="wishListButton" onclick="updateQuantityWishlist(this)"  actionListener="#{wishListManagedBean.addProductWishList(product)}" class="block2-btn-addwishlist hov-pointer trans-0-4" >
+                                                    <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                                    <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                                    <f:ajax execute="wishListButton" render="wishListID wishListIDMobile"/>
+                                                    <h:panelGroup styleClass="inputParamWishListClass">
+                                                        <h:inputHidden value="#{wishListManagedBean.quantityWishList}"/>
+                                                        <f:param name = "quantity" value = "#{wishListManagedBean.quantityWishList}"/>
+                                                    </h:panelGroup>
+                                                </h:commandLink>
+                                            </h:form>                                           
+
+                                            <div class="block2-btn-addcart w-size1 trans-0-4">
+                                                <h:form>
+                                                    <f:ajax execute="cartButton">
+                                                        <h:commandButton value="Add to Cart" type="button" id="cartButton" onclick="updateQuantity(this)"  action="#{cartManagedBean.insertToCart(product)}" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4 addCartButton" >
+                                                            <h:panelGroup styleClass="inputParamClass">
+                                                                <h:inputHidden value="#{cartManagedBean.quantityPassed}"/>
+                                                                <f:param name = "quantity" value = "#{cartManagedBean.quantityPassed}"/>
+                                                            </h:panelGroup>
+                                                        </h:commandButton>
+                                                    </f:ajax>
+                                                </h:form> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="block2-txt p-t-20">
+                                        <h:outputLink  value="productDetails.xhtml" class="block2-name dis-block s-text3 p-b-5">
+                                            #{product.name}
+                                        </h:outputLink>
+                                        <span class="block2-price m-text6 p-r-5">
+                                            #{product.priceSale}
+                                        </span>
+
+                                    </div>
+                                    <div class="block2-name dis-block s-text3 p-b-5 p-t-5">
+                                        Available Quantity : #{product.availableQuantity}
+                                    </div>
+                                    <span class="block2-name s-text3 p-b-5">
+                                        Quantity : 
+                                    </span>
+                                    <input id="quantity" class="size8 m-text18 t-center num-product quantityClass" type="number" name="num-product2" value="1"/>
+                                </div>
+                            </div>
+                        </ui:repeat>    
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Shipping -->
+        <section class="shipping bgwhite p-t-62 p-b-46">
+            <div class="flex-w p-l-15 p-r-15">
+                <div class="flex-col-c w-size5 p-l-15 p-r-15 p-t-16 p-b-15 respon1">
+                    <h4 class="m-text12 t-center">
+                        Free Delivery Worldwide
+                    </h4>
+                </div>
+
+                <div class="flex-col-c w-size5 p-l-15 p-r-15 p-t-16 p-b-15 bo2 respon2">
+                    <h4 class="m-text12 t-center">
+                        30 Days Return
+                    </h4>
+
+                    <span class="s-text11 t-center">
+                        Simply return it within 30 days for an exchange.
+                    </span>
+                </div>
+
+                <div class="flex-col-c w-size5 p-l-15 p-r-15 p-t-16 p-b-15 respon1">
+                    <h4 class="m-text12 t-center">
+                        Store Opening
+                    </h4>
+
+                    <span class="s-text11 t-center">
+                        Shop open from Monday to Sunday
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!--footer-->
+        <ui:include src="bottom.xhtml"/>
+    </body>
 </html>
 

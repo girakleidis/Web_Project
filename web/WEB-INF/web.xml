@@ -11,7 +11,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -19,6 +19,28 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>/index.xhtml</welcome-file>
     </welcome-file-list>
+    
+    <mime-mapping>
+    <extension>ico <!--{or the extension of file}--></extension>
+    <mime-type>text/html</mime-type>
+  </mime-mapping>
+  
+  <filter>
+        <filter-name>Filter</filter-name>
+        <filter-class>filter.Authorization</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Filter</filter-name>
+        <url-pattern>/panel/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>FilterMember</filter-name>
+        <filter-class>filter.FilterMember</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>FilterMember</filter-name>
+        <url-pattern>/panel/panelAdmin/*</url-pattern>
+    </filter-mapping>
 </web-app>

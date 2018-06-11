@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+        <ui:composition>
+            <h:form>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">Products Id</th>
+                            <th style="text-align: center;">Availlable Quantity</th>
+                            <th style="text-align: center;">Verified</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ui:repeat var="p" value="#{productManagedBean.fetchProductListMember()}" varStatus="status">
+                            <tr>
+                                <td>#{p.productId.name}</td>
+                                <td>#{p.quantity}</td>
+                                <td>#{(p.verified == 0) ? "Unverified" : "Verified"}</td>
+                            </tr>
+                        </ui:repeat>
+                    </tbody>
+                </table>
+
+
+            </h:form>
+            <p:growl id="messages" showDetail="true" />
+            <h2 style="padding: 20px 0px 20px 0px;">Product Offer</h2>
+            <h:form>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">Product</th>
+                            <th style="text-align: center;">Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h:selectOneMenu value = "#{productManagedBean.productOfferSelectedId}" style="text-align:center; width: 100px;">
+
+                                    <f:selectItems value = "#{productManagedBean.products}" var = "r" itemLabel="#{r.name}" itemValue="#{r.id}"/>
+
+                                </h:selectOneMenu>
+                            </td>
+                            <td ><h:inputText value="#{productManagedBean.productOfferQuantity}" style="text-align:center; width: 100px;"/></td>
+
+                            <td>
+                                <h:commandLink action="#{productManagedBean.addProductOffer}">
+                                    <f:actionListener binding="#{panelManagedBean.setPageInclude('panelMemberProducts.xhtml?faces-redirect=true')}" />
+                                    <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                </h:commandLink>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </h:form>
+
+
+
+        </ui:composition>
+
+    </h:body>
+</html>
+

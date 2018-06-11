@@ -1,0 +1,266 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <link rel="icon" type="image/png" href="#{resource['images/partnerNew2.png']}" />
+            <h:outputStylesheet name = "vendor/bootstrap/css/bootstrap.min.css"/>
+            <h:outputStylesheet name = "fonts/font-awesome-4.7.0/css/font-awesome.min.css"/>
+            <h:outputStylesheet name = "fonts/themify/themify-icons.css"/>
+            <h:outputStylesheet name = "fonts/Linearicons-Free-v1.0.0/icon-font.min.css"/>
+            <h:outputStylesheet name = "fonts/elegant-font/html-css/style.css"/>
+            <h:outputStylesheet name = "vendor/animate/animate.css"/>
+            <h:outputStylesheet name = "vendor/css-hamburgers/hamburgers.min.css"/>
+            <h:outputStylesheet name = "vendor/animsition/css/animsition.min.css"/>
+            <h:outputStylesheet name = "vendor/select2/select2.min.css"/>
+            <h:outputStylesheet name = "vendor/daterangepicker/daterangepicker.css"/>
+            <h:outputStylesheet name = "vendor/slick/slick.css"/>
+            <h:outputStylesheet name = "vendor/lightbox2/css/lightbox.min.css"/>
+            <h:outputStylesheet name = "vendor/noui/nouislider.min.css"/>
+            <h:outputStylesheet name = "css/main.css"/>
+            <h:outputStylesheet name = "css/util.css"/>            
+            <h:outputStylesheet name = "vendor/select2/select2.min.css"/>
+            <!-- Header -->
+            <header class="header1">
+                <!-- Header desktop -->
+                <div class="container-menu-header">
+                    <div class="topbar">
+                        <div class="topbar-child2">
+                            <a href="https://www.facebook.com/" class="topbar-social-item fa fa-facebook"></a>
+                            <a href="https://www.instagram.com/?hl=el" class="topbar-social-item fa fa-instagram"></a>
+                            <a href="https://gr.pinterest.com/" class="topbar-social-item fa fa-pinterest-p"></a>
+                            <a href="https://www.snapchat.com/" class="topbar-social-item fa fa-snapchat-ghost"></a>
+                            <a href="https://www.youtube.com/" class="topbar-social-item fa fa-youtube-play"></a>
+                        </div>
+
+                        <span class="topbar-child1">
+                            Free shipping for standard order over $100
+                        </span>
+                    </div>
+                    <div class="wrap_header">
+                        <!-- Logo -->
+                        <a href="index.html" class="logo">
+                            <h:graphicImage name = "images/partnerNew2.png"/>
+                        </a>
+
+                        <!-- Menu -->
+                        <div class="wrap_menu">
+                            <nav class="menu">
+                                <ul class="main_menu">
+                                    <li>
+                                        <h:outputLink value="index.xhtml">Home</h:outputLink> 
+                                    </li>
+                                    <li>
+                                        <h:outputLink value="products.xhtml">Products</h:outputLink> 
+                                    </li>
+                                    <li>
+                                        <h:outputLink value="cart.xhtml">Cart</h:outputLink> 
+                                    </li>
+                                    <li>
+                                        <h:outputLink value="blog.xhtml">Blog</h:outputLink> 
+                                    </li>
+                                    <li>
+                                        <h:outputLink value="about.xhtml">About</h:outputLink> 
+                                    </li>
+                                    <li>
+                                        <h:outputLink value="contact.xhtml">Contact</h:outputLink> 
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+
+                        <!-- Header Icon -->
+                        <div class="header-icons">
+                            <span id="userNameId" class="p-r-20" style="font-family: 'Times New Roman';">#{userManagedBean.user.name}</span>
+                            <a href="login.xhtml" class="header-wrapicon1 dis-block">
+                                <h:graphicImage name = "images/icons/icon-header-01.png" class="header-icon1"/>
+                            </a>
+
+                            <span class="linedivide1"></span>
+
+                            <div class="header-wrapicon2">
+                                <h:graphicImage name = "images/icons/iconWishList.png" class="header-icon1 js-show-header-dropdown"/>
+                                <h:form id="wishListID">
+                                    <span id="totalWishList" class="header-icons-noti">#{wishListManagedBean.wishList.size()}</span>
+
+                                    <!-- Header cart noti -->
+                                    <div class="header-cart header-dropdown">
+
+                                        <ul class="header-cart-wrapitem" >                                        
+                                            <ui:repeat var="wishList" value="#{wishListManagedBean.wishList}" varStatus="status" >                                            
+                                                <li class="header-cart-item">
+                                                    <div class="header-cart-item-img">
+                                                        <img src="#{resource[wishList.productId.image]}" alt="IMG-PRODUCT"/>
+                                                    </div>
+
+                                                    <div class="header-cart-item-txt left" >
+                                                        <a href="#" class="header-cart-item-name" style="float: left; display: inline;">
+                                                            #{wishList.productId.name}
+                                                        </a>
+                                                        <h:commandButton type="button" style="width: 30px; float: right;" image="#{resource['images/icons/deleteIcon.ico']}" id="wishListButtonDelete" value="Delete" actionListener="#{wishListManagedBean.deleteProductWishList(wishList)}"  >
+                                                            <f:ajax execute="wishListButtonDelete" render="wishListID wishListIDMobile" />
+                                                        </h:commandButton>
+                                                        <div class="header-cart-item-info" style="clear : left;" >
+                                                            #{wishList.productId.priceSale}
+                                                            <span> -  Quantity : #{wishList.quantity}</span>
+                                                        </div>     
+                                                    </div>                                                                                       
+                                                </li>
+                                            </ui:repeat>
+                                        </ul>
+                                        <div class="header-cart-total">
+                                            Total: $#{wishListManagedBean.getTotalPrice()}
+                                        </div>
+
+                                        <div class="header-cart-buttons">
+                                            <div class="header-cart-wrapbtn">
+                                                <!-- Button -->
+                                                <a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4 ">
+                                                    View Cart
+                                                </a>
+                                            </div>
+                                            <div class="header-cart-wrapbtn">
+                                                <!-- Button -->
+                                                <h:commandButton type="button" id="deleteAllWishList" value="Delete All" actionListener="#{wishListManagedBean.deleteAllProductWishList()}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4 " >
+                                                    <f:ajax execute="deleteAllWishList" render="wishListID wishListIDMobile" />
+                                                </h:commandButton>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Header Mobile -->
+                <div class="wrap_header_mobile">
+                    <!-- Logo moblie -->
+                    <a href="index.html" class="logo-mobile">
+                        <h:graphicImage name = "images/partnerNew2.png" />
+                    </a>
+                    <!-- Button show menu -->
+                    <div class="btn-show-menu">
+                        <!-- Header Icon mobile -->
+                        <div class="header-icons-mobile">
+                            <span class="p-r-20" style="font-family: 'Times New Roman';">#{userManagedBean.user.name}</span>
+                            <a href="login.xhtml" class="header-wrapicon1 dis-block">
+                                <h:graphicImage name = "images/icons/icon-header-01.png" class="header-icon1" />
+                            </a>
+
+                            <span class="linedivide2"></span>
+
+
+
+                            <div class="header-wrapicon2">
+                                <h:graphicImage name = "images/icons/iconWishList.png" class="header-icon1 js-show-header-dropdown"/>
+                                <h:form id="wishListIDMobile">
+                                    <span class="header-icons-noti">#{wishListManagedBean.wishList.size()}</span>
+
+                                    <!-- Header cart noti -->
+                                    <div class="header-cart header-dropdown">
+                                        <ul class="header-cart-wrapitem" >                                        
+                                            <ui:repeat var="wishList" value="#{wishListManagedBean.wishList}" varStatus="status" >                                            
+                                                <li class="header-cart-item">
+                                                    <div class="header-cart-item-img">
+                                                        <img src="#{resource[wishList.productId.image]}" alt="IMG-PRODUCT"/>
+                                                    </div>
+
+                                                    <div class="header-cart-item-txt" >
+                                                        <a href="#" class="header-cart-item-name" style="float: left; display: inline;">
+                                                            #{wishList.productId.name}
+                                                        </a>
+                                                        <h:commandButton type="button" style="width: 30px; float: right;" image="#{resource['images/icons/deleteIcon.ico']}" id="wishListButtonDeleteMobile" value="Delete" actionListener="#{wishListManagedBean.deleteProductWishList(wishList)}"  >
+                                                            <f:ajax execute="wishListButtonDeleteMobile" render="wishListIDMobile wishListID" />
+                                                        </h:commandButton>
+                                                        <div class="header-cart-item-info" style="clear : left;" >
+                                                            #{wishList.productId.priceSale}
+                                                        </div>     
+                                                    </div>                                                                                       
+                                                </li>
+                                            </ui:repeat>
+                                        </ul>
+                                        <div class="header-cart-total">
+                                            Total: $#{wishListManagedBean.getTotalPrice()}
+                                        </div>
+
+                                        <div class="header-cart-buttons">
+                                            <div class="header-cart-wrapbtn centered">
+                                                <!-- Button -->
+                                                <a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4 ">
+                                                    View Cart
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </h:form>
+                            </div>                           
+                        </div>
+
+                        <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Mobile -->
+                <div class="wrap-side-menu" >
+                    <nav class="side-menu">
+                        <ul class="main-menu">
+                            <li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
+                                <span class="topbar-child1">
+                                    Free shipping for standard order over $100
+                                </span>
+                            </li>
+
+                            <li class="item-topbar-mobile p-l-10">
+                                <div class="topbar-social-mobile">
+                                    <a href="https://www.facebook.com/" class="topbar-social-item fa fa-facebook"></a>
+                                    <a href="https://www.instagram.com/?hl=el" class="topbar-social-item fa fa-instagram"></a>
+                                    <a href="https://gr.pinterest.com/" class="topbar-social-item fa fa-pinterest-p"></a>
+                                    <a href="https://www.snapchat.com/" class="topbar-social-item fa fa-snapchat-ghost"></a>
+                                    <a href="https://www.youtube.com/" class="topbar-social-item fa fa-youtube-play"></a>
+                                </div>
+                            </li>
+
+                            <li class="item-menu-mobile">
+                                <a href="index.html">Home</a>
+                            </li>
+                            <li class="item-menu-mobile">
+                                <a href="products.html">Products</a>
+                            </li>
+
+                            <li class="item-menu-mobile">
+                                <a href="cart.html">Cart</a>
+                            </li>
+
+
+                            <li class="item-menu-mobile">
+                                <a href="blog.html">Blog</a>
+                            </li>
+
+                            <li class="item-menu-mobile">
+                                <a href="about.html">About</a>
+                            </li>
+
+                            <li class="item-menu-mobile">
+                                <a href="contact.html">Contact</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+
+
+        </ui:composition>
+    </h:body>
+</html>
+

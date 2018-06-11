@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Register</title>
+    </h:head>
+    <h:body class="bg-dark">
+        <!--header-->
+        <ui:include src="top.xhtml"/>
+        <div class="container" style="width: 40%; margin-bottom: 50px">
+            <div class="card card-login mx-auto mt-5">
+                <div class="card-header">Register</div>
+                <div class="card-body" style="background-color: #ced5ff;">
+                    <h:form>
+                        <div class="form-group">
+                            <label for="inputName">name</label>
+                            <h:inputText value="#{userManagedBean.userRegister.name}" class="form-control" id="inputName" required="true" requiredMessage="name is required" p:type="name" p:placeholder="name"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSurname">surname</label>
+                            <h:inputText value="#{userManagedBean.userRegister.surname}" class="form-control" id="inputSurname" required="true" requiredMessage="surname is required" p:type="surname" p:placeholder="surname"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail">Email address</label>
+                            <h:inputText value="#{userManagedBean.userRegister.email}" class="form-control" id="inputEmail" required="true" requiredMessage="Email is required" p:type="email" p:placeholder="Email"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword1">Password</label>
+                            <h:inputText value="#{userManagedBean.userRegister.password}" class="form-control" id="inputPassword" required="true" requiredMessage="Password is required" p:type="password" p:placeholder="Password"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword2">Repeat Password</label>
+                            <h:inputText value="#{userManagedBean.passwordValid}" class="form-control" id="inputPassword2" required="true" requiredMessage="Password is required" p:type="password" p:placeholder="Password"/>
+                        </div>
+                        <div class="form-group">
+                            <h:selectOneMenu value = "#{userManagedBean.role}"> 
+                                <f:selectItem itemValue = "2" itemLabel = "Member" /> 
+                                <f:selectItem itemValue = "3" itemLabel = "Client" /> 
+                            </h:selectOneMenu> 
+                        </div>
+                        <h:commandLink class="btn btn-primary btn-block" value="Register" action="#{userManagedBean.registerUser}">
+                        </h:commandLink>
+                    </h:form>
+                    <h:messages style="color: red" globalOnly="true"/>
+
+                </div>
+            </div>
+        </div>
+        <!--footer-->
+        <ui:include src="bottom.xhtml"/>
+    </h:body>
+</html>
+

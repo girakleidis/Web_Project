@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Edit</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <h:form enctype="multipart/form-data">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">Properties</th>
+                            <th style="text-align: center;">Values</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Product Name</td>
+                            <td><h:inputText value="#{productManagedBean.product.name}" /></td>
+                        </tr>
+                        <tr>
+                            <td>Value</td>
+                            <td><h:inputText value="#{productManagedBean.product.priceSale}"/></td>
+                        </tr>
+                        <tr>
+                            <td>Value Multiply</td>
+                            <td><h:inputText value="#{productManagedBean.product.priceMul}"/></td>
+                        </tr>
+                        <tr>
+                            <td>Available Quantity</td>
+                            <td><h:inputText  value="#{productManagedBean.product.availableQuantity}"/></td>
+                        </tr>
+                        <tr>
+                            <td>Category</td>
+                            <td>
+                                <h:selectOneMenu value = "#{productManagedBean.product.categoryId}" >
+                                    <f:converter binding="#{categoryConverter}"/>
+                                    <f:selectItems value = "#{productManagedBean.cat}" var = "r"
+                                                   itemLabel="#{r.name}"/>
+                                </h:selectOneMenu>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Image</td>
+                            <td><h:graphicImage height="100" width="100" value="#{resource[productManagedBean.product.image]}"/></td>
+                        </tr>
+                        <tr>
+                            <td>Image Upload</td>
+                            <td>
+                                <p:fileUpload fileUploadListener="#{productManagedBean.handleImgUpload}" oncomplete="" mode="advanced"
+                                              update="messages" auto="false" sizeLimit="20000000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/">
+                                </p:fileUpload>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Save</td>
+                            <td>
+                                <h:commandButton value="Save" action="#{productManagedBean.updateProduct(productManagedBean.product)}">
+                                    <f:actionListener binding="#{panelManagedBean.setPageInclude('panelAdminProducts.xhtml')}" />
+                                </h:commandButton>
+                            </td>
+                        </tr>
+                        <p:growl id="messages" showDetail="true" />
+                    </tbody>
+                </table>
+            </h:form>
+        </ui:composition>
+    </h:body>
+</html>
+

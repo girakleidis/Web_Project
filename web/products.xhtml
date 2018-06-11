@@ -1,0 +1,219 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Products</title>
+    </h:head>
+    <h:body>
+        <!--header-->
+        <ui:include src="top.xhtml"/>
+        <!-- Title Page -->
+        <section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(#{resource['images/products2.png']});">
+            <h2 class="l-text2 color3">
+                <span style="color:green;">O</span><span style="color:greenyellow;">u</span><span style="color:yellow;">r</span><span style="color:red;"></span>
+                <span style="color:blue;">P</span><span style="color:blueviolet;">r</span><span style="color:green;">o</span><span style="color:greenyellow;">d</span><span style="color:yellow;">u</span><span style="color:red;">c</span><span style="color:blue;">t</span><span style="color:blueviolet;">s</span>
+            </h2>
+        </section>
+
+
+        <!-- Content page -->
+        <section class="bgwhite p-t-55 p-b-65">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
+                        <div class="leftbar p-r-20 p-r-0-sm">
+                            <!--  -->
+                            <h4 class="m-text14 p-b-7">
+                                Categories
+                            </h4>
+
+                            <ul class="p-b-54">
+                                <li class="p-t-4">
+                                    <h:form>
+                                        <h:commandLink value="All"   id="filterCategoryAll"  actionListener="#{productFilterManagedBean.fetchProductByCategory()}" class="s-text13 active1" >
+                                            <f:param name="categoryId" value="0" />
+                                            <f:ajax execute="filterCategoryAll" render="productFilter"/>
+                                        </h:commandLink>
+                                    </h:form>
+                                </li>
+                                <ui:repeat var="category" value="#{productManagedBean.getAllCategories()}" varStatus="status">
+                                    <li class="p-t-4">
+                                        <h:form>
+                                            <h:commandLink value="#{category.name}"   id="filterCategory"  actionListener="#{productFilterManagedBean.fetchProductByCategory()}" class="s-text13" >
+                                                <f:param name="categoryId" value="#{category.id}" />
+                                                <f:ajax execute="filterCategory" render="productFilter"/>
+                                            </h:commandLink>
+                                        </h:form>
+                                    </li>
+                                </ui:repeat>
+                            </ul>
+
+                            <!--  -->
+                            <h4 class="m-text14 p-b-32">
+                                Filters
+                            </h4>
+
+                            <div class="filter-price p-t-22 p-b-50 bo3">
+                                <div class="m-text15 p-b-17">
+                                    Price
+                                </div>
+
+                                <div class="wra-filter-bar">
+                                    <div id="filter-bar"></div>
+                                </div>
+
+                                <div class="flex-sb-m flex-w p-t-16">
+
+                                    <div class="w-size11">
+                                        <!-- Button -->
+                                        <h:form id="formLowUppper">
+                                            <h:commandButton value="Filter"  id="filterButton" actionListener="#{productFilterManagedBean.fetchProductByPrice()}" class="flex-c-m size4 bg7 bo-rad-15 hov1 s-text14 trans-0-4" >
+                                            </h:commandButton>
+                                            <h:inputHidden  id="valueLowerHidden" value="#{productFilterManagedBean.lowerPriceValue}"/>
+                                            <h:inputHidden  id="valueUpperHidden" value="#{productFilterManagedBean.upperPriceValue}"/>
+                                        </h:form> 
+                                    </div>
+
+                                    <div class="s-text3 p-t-10 p-b-10">
+                                        Range: $<h:panelGroup id="value-lower" >#{productFilterManagedBean.lowerPriceValue}</h:panelGroup> - $<h:panelGroup id="value-upper">#{productFilterManagedBean.upperPriceValue}</h:panelGroup>                                        
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
+                        <!--  -->
+                        <div class="flex-sb-m flex-w p-b-35">
+                            <div class="search-product pos-relative bo4 of-hidden">
+                                <input id ="inputSearch" class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Search Products..."/>
+                                <h:form id="formSearch">                  
+                                    <h:commandButton style="background-image: url(#{resource['images/icons/searchIcon.png']}); background-size: 30px; background-repeat: no-repeat; background-position: center; "  type="button" id="searchButton" onclick="javascriptFunction()" actionListener="#{productFilterManagedBean.fetchProductsBySearch()}" class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4 fs-12"> 
+                                        <f:ajax execute="searchButton" render="productFilter"/>
+                                        <h:inputHidden  id="valueInputSearch" value="#{productFilterManagedBean.searchFilter}"/>
+                                    </h:commandButton>
+                                </h:form>
+                            </div>
+                        </div>
+
+                        <!-- Product -->
+                        <div class="row" >
+                            <h:panelGroup  id="productFilter" class="row">
+                                <ui:repeat  var="product" value="#{productFilterManagedBean.products}" varStatus="status" >
+                                    <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
+                                        <!-- Block2 -->
+                                        <div class="block2">
+                                            <div class="block2-img wrap-pic-w of-hidden pos-relative">
+                                                <img src="#{resource[product.image]}" alt="IMG-PRODUCT"/>
+                                                <div class="block2-overlay trans-0-4">
+                                                    <h:form>
+                                                        <h:commandLink  id="wishListButton"  actionListener="#{wishListManagedBean.addProductWishList(product)}" styleClass="block2-btn-addwishlist hov-pointer trans-0-4" >
+                                                            <i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
+                                                            <i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
+                                                            <f:ajax execute="wishListButton" render="wishListID wishListIDMobile"/>
+                                                        </h:commandLink>
+                                                    </h:form>  
+
+                                                    <div class="block2-btn-addcart w-size1 trans-0-4">
+                                                        <!-- Button -->
+                                                        <h:form>
+                                                            <h:commandButton value="Add to Cart" type="button" id="cartButton" onclick="updateQuantity(this)"  actionListener="#{cartManagedBean.insertToCart(product)}" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" >
+                                                                <f:ajax execute="cartButton"/>
+                                                                <h:panelGroup styleClass="inputParamClass">
+                                                                    <h:inputHidden value="#{cartManagedBean.quantityPassed}"/>
+                                                                    <f:param name = "quantity" value = "#{cartManagedBean.quantityPassed}"/>
+                                                                </h:panelGroup>
+                                                            </h:commandButton>
+                                                        </h:form> 
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="block2-txt p-t-20">
+                                                <h:outputLink  value="productDetails.xhtml" class="block2-name dis-block s-text3 p-b-5">
+                                                    #{product.name}
+                                                    <f:param name="productId" value="#{product.id}" />
+                                                </h:outputLink >
+                                                <span class="block2-price m-text6 p-r-5">
+                                                    #{product.priceSale}
+                                                </span>
+                                            </div>
+                                            <div class="block2-name dis-block s-text3 p-b-5 p-t-5">
+                                                Available Quantity : #{product.availableQuantity}
+                                            </div>
+                                            <span class="block2-price m-text21 p-r-5">
+                                                Quantity : 
+                                            </span>
+                                            <input id="quantity" class="size8 m-text18 t-center num-product quantityClass" type="number" name="num-product2" value="1"/>
+                                        </div>
+                                    </div>
+                                </ui:repeat>                            
+                            </h:panelGroup >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!--footer-->
+        <ui:include src="bottom.xhtml"/>
+        <h:outputScript name="vendor/noui/nouislider.js"></h:outputScript>
+        <script type="text/javascript">
+            /*[ No ui ]
+             ===========================================================*/
+            var filterBar = document.getElementById('filter-bar');
+            var lowerPriceString = "#{productFilterManagedBean.lowerPriceValue}";
+            var upperPriceString = "#{productFilterManagedBean.upperPriceValue}";
+            var lowerPrice = parseFloat(lowerPriceString);
+            var upperPrice = (upperPriceString == '0') ? 5 : parseFloat(upperPriceString);
+
+            noUiSlider.create(filterBar, {
+                start: [lowerPrice, upperPrice],
+                connect: true,
+                range: {
+                    'min': 0,
+                    'max': 5
+                }
+            });
+
+            var skipValues = [
+                document.getElementById('value-lower'),
+                document.getElementById('value-upper')
+            ];
+
+            filterBar.noUiSlider.on('update', function (values, handle) {
+                skipValues[handle].innerHTML = Math.round(values[handle]);
+                document.getElementById("formLowUppper:valueLowerHidden").value = document.getElementById('value-lower').innerHTML;
+                document.getElementById("formLowUppper:valueUpperHidden").value = document.getElementById('value-upper').innerHTML;
+            });
+
+            function javascriptFunction() {
+                var valueTemp = document.getElementById("inputSearch").value;
+                document.getElementById("formSearch:valueInputSearch").value = valueTemp;
+            }
+
+            // Get the input field
+            var input = document.getElementById("inputSearch");
+
+            // Execute a function when the user releases a key on the keyboard
+            input.addEventListener("keyup", function (event) {
+                // Cancel the default action, if needed
+                event.preventDefault();
+                // Number 13 is the "Enter" key on the keyboard
+                if (event.keyCode === 13) {
+                    // Trigger the button element with a click
+                    document.getElementById("formSearch:searchButton").click();
+                }
+            });
+
+        </script>
+    </h:body>
+</html>
+

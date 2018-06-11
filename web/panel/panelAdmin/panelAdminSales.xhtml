@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Sales</title>
+        <h:outputStylesheet name = "vendor/bootstrap/css/bootstrap.min.css"/>
+        <h:outputStylesheet name = "fonts/font-awesome-4.7.0/css/font-awesome.min.css"/>
+        <h:outputStylesheet name = "fonts/themify/themify-icons.css"/>
+        <h:outputStylesheet name = "fonts/Linearicons-Free-v1.0.0/icon-font.min.css"/>
+        <h:outputStylesheet name = "fonts/elegant-font/html-css/style.css"/>
+        <h:outputStylesheet name = "vendor/animate/animate.css"/>
+        <h:outputStylesheet name = "vendor/css-hamburgers/hamburgers.min.css"/>
+        <h:outputStylesheet name = "vendor/animsition/css/animsition.min.css"/>
+        <h:outputStylesheet name = "vendor/select2/select2.min.css"/>
+        <!--<h:outputStylesheet name = "vendor/daterangepicker/daterangepicker.css"/>-->
+        <h:outputStylesheet name = "vendor/slick/slick.css"/>
+        <h:outputStylesheet name = "vendor/lightbox2/css/lightbox.min.css"/>
+        <h:outputStylesheet name = "vendor/noui/nouislider.min.css"/>
+        <h:outputStylesheet name = "css/main.css"/>
+        <h:outputStylesheet name = "css/util.css"/>            
+        <h:outputStylesheet name = "vendor/select2/select2.min.css"/>
+        <style>
+            .topBarStyle{
+                height: 70px;
+                font-size: 25px;
+                color: white;
+                text-align:center;
+            }
+
+            .linkFontsize{
+                font-size: 25px;
+            }
+
+            .leftBar {
+                color: white;
+                float: left;
+                width: 20%;
+                height: 100%;
+                font-size: calc(12px + 2vw);
+            }
+
+            .rightBar {
+                float: right;
+                width: 80%;
+                height: 100%;
+                text-align:center;
+            }
+
+            @media screen and (max-width: 600px) {
+                .rightBar {
+                    display: block;
+                    width: 100%;
+                    text-align:center;
+                }
+                .leftBar {
+                    display: block;
+                    width: 100%;                    
+                    text-align:center;
+                }
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h3 style="padding-top:20px;">Choose Date</h3>
+        <h:form style="padding:20px 0px 10px 0px;">
+            <p:calendar id="fromDate" value="#{panelManagedBean.saleStart}">
+                <p:ajax event="dateSelect" update="toDate" />
+            </p:calendar>
+            <p:calendar id="toDate" value="#{panelManagedBean.saleEnd}" mindate="#{panelManagedBean.saleStart}"/>
+            <div style="margin-top:20px;">
+                <h:commandButton action="#{salesManagedBean.showSales()}" value="Show Sales" class="btn-primary" style="padding:10px 10px 10px 10px; border-radius: 20px;"/>
+            </div>
+        </h:form>
+        <h:form style="padding-top:54px;">
+            <p:dataTable var="sale" value="#{panelManagedBean.salesList}" rows="5"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+                <p:column headerText="Product Name">
+                    <h:outputText value="#{sale.productId.name}" />
+                </p:column>
+
+                <p:column headerText="Customer">
+                    <h:outputText value="#{sale.clientId.userId.name}" />
+                </p:column>
+
+                <p:column headerText="Price">
+                    <h:outputText value="#{sale.price}" />
+                </p:column>
+                <p:column headerText="Quantity">
+                    <h:outputText value="#{sale.quantity}" />
+                </p:column>
+                <p:column headerText="Date">
+                    <h:outputText value="#{sale.date}" />
+                </p:column>
+
+
+
+                <f:facet name="paginatorBottomRight">
+                    <p:commandButton type="button" icon="fa fa-cloud-upload" />
+                </f:facet>
+            </p:dataTable>
+        </h:form>
+
+
+    </h:body>
+</html>
+

@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>About</title>
+        
+    </h:head>
+    <body>
+        <!--header-->
+        <ui:include src="top.xhtml"/>
+
+        <!-- Title Page -->
+        <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m hov-img-zoom" >
+            <img src="#{resource['images/about-us.jpg']}" alt="IMG-ABOUT"/>
+        </section>
+
+        <!-- content page -->
+        <section class="bgwhite p-t-66 p-b-38">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 p-b-30">
+                        <div class="hov-img-zoom">
+                            <img src="#{resource['images/company-1.png']}" alt="IMG-ABOUT"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8 p-b-30">
+                        <h3 class="m-text26 p-t-15 p-b-16">
+                            Our story
+                        </h3>
+
+                        <p class="p-b-28">
+                            Over the years we have grown in all aspects — and continue to every day — but our goals have remained the same. Have fun while working with the best technology at hand. Design and create the finest product we can. Compete with the top in the industry. Learn from the best. Focus on the essential. Cultivate openness and respect in all communication. Be friends with one another. Learn constantly. Share what we know.
+                        </p>
+
+                        <div class="bo13 p-l-29 m-l-9 p-b-10">
+                            <p class="p-b-11">
+                                Creativity is just connecting things. When you ask creative people how they did something, they feel a little guilty because they didn't really do it, they just saw something. It seemed obvious to them after a while.
+                            </p>
+
+                            <span class="s-text7">
+                                - Steve Job’s
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+       <!--footer-->
+       <ui:include src="bottom.xhtml"/>
+    </body>
+</html>
+
+
